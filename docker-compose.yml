@@ -1,0 +1,94 @@
+services:
+  # fastapi:
+  #   build: .
+  #   container_name: fastapi
+  #   environment:
+  #     - SQLALCHEMY_DATABASE_URL=postgresql+asyncpg://postgres:123456@postgres/brawlstars
+  #     - SQLALCHEMY_DATABASE_SYNC_URL=postgresql+psycopg://postgres:123456@postgres/brawlstars
+  #     - SECRET_KEY=fa53339073e204a7f9ac974684b6dcf392159d84ecf587aae79e642397003349
+  #     - REFRESH_SECRET_KEY=cf318f02a9b859c197eb38ad9ba4d1eb8ff0ea31e105372f8f31d5d74e89414e
+  #     - BROKER_URL=redis://redis:6379/0
+  #     - CRYPTOGRAPHY_KEY=J5F-83NQZGPYvuYQwqX-jwvFaJCFF6ARsH-bKa91E-w=
+  #     - ELASTICSEARCH_URL=http://elasticsearch:9200
+  #   ports:
+  #     - "8082:8082"
+  #   depends_on:
+  #     redis:
+  #       condition: service_healthy
+  #     postgres:
+  #       condition: service_started
+  #     elasticsearch:
+  #       condition: service_started
+  #   networks:
+  #     - general
+
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=brawlstars
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - general
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  elasticsearch:
+    image: elasticsearch:8.10.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ELASTIC_PASSWORD=123456
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    networks:
+      - general
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  redis:
+    image: redis
+    container_name: redis
+    sysctls:
+      - net.core.somaxconn=1024
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    networks:
+      - general
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+volumes:
+  postgres_data:
+  redis_data:
+  es_data:
+
+networks:
+  general:
+    driver: bridge
