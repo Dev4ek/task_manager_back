@@ -1,10 +1,24 @@
 # Task Manager Backend
 
-This is a FastAPI-based backend application for a task manager. It uses PostgreSQL as the database, Redis for caching, and Elasticsearch for search functionality. This guide will help you set up and run the application using Docker.
+Есть три созданных аккаунта
+
+АДМИН
+логин: admin
+пароль: admin
+
+Участник
+логин: member
+пароль: member
+
+ГОСТЬ
+пароль: guest
+
+
+
 
 ## Prerequisites
 
-Make sure you have the following installed:
+Посмотрите установлен ли докер
 
 - [Docker](https://www.docker.com/get-started)
 - [Docker Compose](https://docs.docker.com/compose/)
