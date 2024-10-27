@@ -19,9 +19,7 @@ Make sure you have the following installed:
 
 2. Build and run the application:
 
-You can use Docker Compose to build and run the application. Run the following command:
-
- ```bash
+    ```bash
     docker-compose up --build
 
 3. Access the application:
@@ -31,6 +29,7 @@ Once everything is running, you can access the FastAPI application at:
     ```bash
     http://localhost:8082/docs
 
+4. Environment variables
 SQLALCHEMY_DATABASE_URL: Connection string for asynchronous PostgreSQL.
 SQLALCHEMY_DATABASE_SYNC_URL: Connection string for synchronous PostgreSQL.
 SECRET_KEY: Secret key for cryptographic operations.
