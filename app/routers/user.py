@@ -149,7 +149,7 @@ async def update_user(
         current_user.avatar_image = path_image
 
     await session.commit()
-    session.refresh(current_user)
+    await session.refresh(current_user)
 
     return current_user
 
@@ -184,6 +184,6 @@ async def update_user(
         current_user.avatar_image = path_image
 
     await session.commit()
-    session.refresh(current_user)
+    await session.refresh(current_user)
 
     return current_user

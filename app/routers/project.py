@@ -104,7 +104,7 @@ async def update_project(
         project.description = description
     
     await session.commit()
-    session.refresh(project)
+    await session.refresh(project)
 
     return project
 

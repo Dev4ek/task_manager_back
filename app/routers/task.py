@@ -106,7 +106,7 @@ async def update_task(
         task.comment = comment
 
     await session.commit()
-    session.refresh(task)
+    await session.refresh(task)
     return task
 
 @router_task.delete(
