@@ -14,7 +14,7 @@ Make sure you have the following installed:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Dev4ek/Hackaton2024_Front.git
+   git clone https://github.com/Dev4ek/task_manager_backend.git
    cd taskManager_backend
 
 2. Build and run the application:
