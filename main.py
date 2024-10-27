@@ -4,6 +4,7 @@ load_dotenv()
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 import asyncio
+from app.routers import user, task, project, chat
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -25,13 +26,16 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
   CORSMiddleware,
-  allow_origins = ["http://localhost:3000", "http://localhost:8082"],
+  allow_origins = ["http://localhost:3000", "http://localhost:8082", "http://localhost:5173"],
   allow_methods = ["*"],
   allow_credentials=True,
   allow_headers = ["*"]
 )
 
-# app.include_router(auth.router_auth)
+app.include_router(user.router_user)
+app.include_router(project.router_project)
+app.include_router(task.router_task)
+app.include_router(chat.router_chat)
 
 
 @app.exception_handler(StarletteHTTPException)
