@@ -17,35 +17,19 @@ Make sure you have the following installed:
    git clone https://github.com/yourusername/taskManager_backend.git
    cd taskManager_backend
 
-Build and run the application:
+2. Build and run the application:
 
 You can use Docker Compose to build and run the application. Run the following command:
 
-bash
-docker-compose up --build
-This command will start the FastAPI app, PostgreSQL database, and Redis server. It may take a few moments for the containers to start.
+ ```bash
+    docker-compose up --build
 
-Access the application:
+3. Access the application:
 
 Once everything is running, you can access the FastAPI application at:
 
-arduino
-Копировать код
-http://localhost:8082
-You can also explore the automatically generated API documentation at:
-
-bash
-Копировать код
-http://localhost:8082/docs
-Stopping the application:
-
-To stop the running containers, you can use:
-
-bash
-Копировать код
-docker-compose down
-Environment Variables
-The application uses several environment variables that are defined in the docker-compose.yml file. Here are the key variables:
+    ```bash
+    http://localhost:8082/docs
 
 SQLALCHEMY_DATABASE_URL: Connection string for asynchronous PostgreSQL.
 SQLALCHEMY_DATABASE_SYNC_URL: Connection string for synchronous PostgreSQL.
