@@ -76,7 +76,7 @@ async def update_task(
     title: Optional[str] = Query(None),
     description: Optional[str] = Query(None),
     status_task: Optional[task_schemas.TaskStatus] = Query(None),
-    comment: Optional[str] = Query(None),
+    comment: Optional[str] = Query(None)
 ):
     task = await Task.get_by_uuid(session, task_uuid)
     if not task:
@@ -95,6 +95,7 @@ async def update_task(
             )
     else:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"message": "Access denied"})
+    print("com")
 
     if title is not None:
         task.title = title
@@ -103,6 +104,7 @@ async def update_task(
     if status_task is not None:
         task.status = status_task
     if comment is not None:
+        print("com")
         task.comment = comment
 
     await session.commit()

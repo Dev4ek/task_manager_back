@@ -103,6 +103,7 @@ async def update_project(
     if description is not None:
         project.description = description
     
+    session.add(project)
     await session.commit()
     await session.refresh(project)
 

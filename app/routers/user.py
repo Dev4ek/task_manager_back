@@ -182,7 +182,8 @@ async def update_user(
     if avatar_image:
         path_image = await user_utils.save_avatar_image(avatar_image)
         current_user.avatar_image = path_image
-
+    
+    session.add(current_user)
     await session.commit()
     await session.refresh(current_user)
 
